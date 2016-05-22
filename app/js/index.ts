@@ -49,46 +49,47 @@ var keyA = false
 var keyW = false
 
 
-// function onKeyUp(event) {
-//   var keyCode = event.keyCode;
+function onKeyUp(event) {
+  var keyCode = event.keyCode;
 
-//   switch (keyCode) {
-//     case 68: //d
-//       keyD = false;
-//       break;
-//     case 83: //s
-//       keyS = false;
-//       break;
-//     case 65: //a
-//       keyA = false;
-//       break;
-//     case 87: //w
-//       keyW = false;
-//       break;
-//   }
-// }
+  switch (keyCode) {
+    case 68: //d
+      keyD = false;
+      break;
+    case 83: //s
+      keyS = false;
+      break;
+    case 65: //a
+      keyA = false;
+      break;
+    case 87: //w
+      keyW = false;
+      break;
+  }
+}
 
-// function onKeyDown(event) {
-//   var keyCode = event.keyCode;
 
-//   switch (keyCode) {
-//     case 68: //d
-//       keyD = true;
-//       break;
-//     case 83: //s
-//       keyS = true;
-//       break;
-//     case 65: //a
-//       keyA = true;
-//       break;
-//     case 87: //w
-//       keyW = true;
-//       break;
-//   }
-// }
+function onKeyDown(event) {
+  var keyCode = event.keyCode;
 
-// window.addEventListener("keyup", onKeyUp, false);
-// window.addEventListener("keydown", onKeyDown, false);
+  switch (keyCode) {
+    case 68: //d
+      keyD = true;
+      break;
+    case 83: //s
+      keyS = true;
+      break;
+    case 65: //a
+      keyA = true;
+      break;
+    case 87: //w
+      keyW = true;
+      break;
+  }
+}
+
+window.addEventListener("keyup", onKeyUp, false);
+window.addEventListener("keydown", onKeyDown, false);
 var coeff = 0.05
 var render = function () {
   requestAnimationFrame( render );
