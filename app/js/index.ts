@@ -6,6 +6,37 @@
 var THREE = require('three')
 var a = require('./helper').default
 var Rx = require('rxjs/Rx')
+var Immutable = require('immutable');
+var redux = require('redux');
+var createStore = redux.createStore;
+
+
+function counter(state = 0, action) {
+  switch (action.type) {
+  case 'INCREMENT':
+    return state + 1
+  case 'DECREMENT':
+    return state - 1
+  default:
+    return state
+  }
+}
+
+let store = createStore(counter)
+
+store.subscribe(() =>
+  console.log(store.getState())
+)
+ 
+// The only way to mutate the internal state is to dispatch an action. 
+// The actions can be serialized, logged or stored and later replayed. 
+store.dispatch({ type: 'INCREMENT' })
+// 1 
+store.dispatch({ type: 'INCREMENT' })
+// 2 
+store.dispatch({ type: 'DECREMENT' })
+// 1 
+
 
 var b = new a()
 b.a()
@@ -36,7 +67,6 @@ scene.add(light);
 var geometry2 = new THREE.SphereGeometry( 1, 32, 32 );
 var material = new THREE.MeshLambertMaterial( {color: 0xffff00} );
 for (let i = 0; i<=2; i++) {
-  console.log(i)
   let sphere = new THREE.Mesh( geometry2, material );
   sphere.position.x = 2
   sphere.position.y = i*5
