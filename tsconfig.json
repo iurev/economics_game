@@ -5,12 +5,10 @@
         "declaration": false,
         "noImplicitAny": false,
         "removeComments": true,
-        "noLib": false,
-        "exclude": [
-          "typings/browser.d.ts",
-          "typings/browser",
-          "node_modules",
-          "THREE"
-        ]
-    }
+        "noLib": false
+    },
+    "exclude": [
+        "node_modules",
+        "typings"
+    ]
 }
