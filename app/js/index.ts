@@ -5,44 +5,28 @@
 
 var THREE = require('three')
 var a = require('./helper').default
+var store = require('./store').default
 var Rx = require('rxjs/Rx')
 var Immutable = require('immutable');
-var redux = require('redux');
-var createStore = redux.createStore;
 
-
-function counter(state = 0, action) {
-  switch (action.type) {
-  case 'INCREMENT':
-    return state + 1
-  case 'DECREMENT':
-    return state - 1
-  default:
-    return state
-  }
-}
-
-let store = createStore(counter)
-
-store.subscribe(() =>
-  console.log(store.getState())
+store().subscribe(() =>
+  console.log(store().getState())
 )
  
 // The only way to mutate the internal state is to dispatch an action. 
 // The actions can be serialized, logged or stored and later replayed. 
-store.dispatch({ type: 'INCREMENT' })
+store().dispatch({ type: 'INCREMENT' })
 // 1 
-store.dispatch({ type: 'INCREMENT' })
+store().dispatch({ type: 'INCREMENT' })
 // 2 
-store.dispatch({ type: 'DECREMENT' })
+store().dispatch({ type: 'DECREMENT' })
 // 1 
-
 
 var b = new a()
 b.a()
 
 var scene = new THREE.Scene();
-var camera = new THREE.PerspectiveCamera( 75, window.innerWidth/window.innerHeight, 0.1, 1000 );
+var camera = new THREE.PerspectiveCamera( 10, window.innerWidth/window.innerHeight, 0.1, 1000 );
 
 var renderer = new THREE.WebGLRenderer();
 renderer.setSize( window.innerWidth, window.innerHeight );
@@ -54,24 +38,33 @@ var material = new THREE.MeshLambertMaterial({color: 0x55B663});
 var cube = new THREE.Mesh( geometry, material );
 // scene.add( cube );
 
-camera.position.z = 20;
+camera.position.z = 250;
 
 var alight = new THREE.AmbientLight( 0x404040 ); // soft white light scene.add( light );
 scene.add(alight)
 
-
-var light = new THREE.PointLight(0xffffff);
-light.position.set(60,10,10);
-scene.add(light);
-
-var geometry2 = new THREE.SphereGeometry( 1, 32, 32 );
-var material = new THREE.MeshLambertMaterial( {color: 0xffff00} );
-for (let i = 0; i<=2; i++) {
+store().getState().planets.forEach(function (planet: any) {
+  let material = new THREE.MeshLambertMaterial({ color: planet.color });
+  let geometry2 = new THREE.SphereGeometry( planet.r, 32, 32 );
   let sphere = new THREE.Mesh( geometry2, material );
-  sphere.position.x = 2
-  sphere.position.y = i*5
+  sphere.position.x = planet.x
+  sphere.position.y = planet.y
   scene.add( sphere );
-}
+})
+
+store().getState().stars.forEach(function (star: any) {
+  let material = new THREE.MeshPhongMaterial({ color: star.color, shininess: 120, emissive: 0xbb8383, transparent: true, opacity: 0.5 });
+  
+  let geometry2 = new THREE.SphereGeometry( star.r, 32, 32 );
+  let sphere = new THREE.Mesh( geometry2, material );
+  sphere.position.x = star.x
+  sphere.position.y = star.y
+  scene.add( sphere );
+
+  var light = new THREE.PointLight();
+  light.position.set(star.x, star.y, 0);
+  scene.add(light);
+})
 
 var keyS = false
 var keyD = false
@@ -124,7 +117,7 @@ var keyups = Rx.Observable.fromEvent(window, 'keyup')
 var keydowns = Rx.Observable.fromEvent(window, 'keydown')
   .subscribe(onKeyDown)
 
-var coeff = 0.05
+var coeff = 1
 var render = function () {
   requestAnimationFrame( render );
 
