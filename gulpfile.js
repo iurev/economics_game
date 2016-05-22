@@ -25,7 +25,7 @@ gulp.task('js:typescript:watch', function (cb) {
 });
 
 gulp.task('js:js:watch', function (cb) {
-    gulp.watch('build/js/output.js', ['js:browserify']);
+    gulp.watch('app/js/*.js', ['js:browserify']);
 });
 
 gulp.task('js:watch', ['js:typescript:watch', 'js:js:watch'])
