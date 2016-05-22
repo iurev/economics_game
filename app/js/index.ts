@@ -5,6 +5,7 @@
 
 var THREE = require('three')
 var a = require('./helper').default
+var Rx = require('rxjs/Rx')
 
 var b = new a()
 b.a()
@@ -87,8 +88,12 @@ function onKeyDown(event) {
   }
 }
 
-window.addEventListener("keyup", onKeyUp, false);
-window.addEventListener("keydown", onKeyDown, false);
+var keyups = Rx.Observable.fromEvent(window, 'keyup')
+  .subscribe(onKeyUp)
+  
+var keydowns = Rx.Observable.fromEvent(window, 'keydown')
+  .subscribe(onKeyDown)
+
 var coeff = 0.05
 var render = function () {
   requestAnimationFrame( render );
