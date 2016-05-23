@@ -10,6 +10,17 @@ var camera = function(state) {
     camera.position.z = 250
 }
 
+var ship = function(state) {
+  var scene = state.scene.obj
+  var geometry = new THREE.BoxGeometry( 1, 1, 1 );
+  var material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+  var cube = new THREE.Mesh( geometry, material );
+  state.ship.obj = cube
+  cube.position.x = 10
+  cube.position.y = 10
+  scene.add( cube );
+}
+
 var renderer = function(state) {
     var renderer = new THREE.WebGLRenderer();
     renderer.setSize(window.innerWidth, window.innerHeight);
@@ -76,4 +87,5 @@ export default function(state: any) {
   addStars(state)
   addPlanets(state)
   aLight(state)
+  ship(state)
 }

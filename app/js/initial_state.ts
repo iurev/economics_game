@@ -37,5 +37,12 @@ export default {
         color: 0xffff00,
         r: 5
     }],
+    ship: {
+      obj: null
+    },
+    mouse: {
+      x: null,
+      y: null
+    },
     keys: []
 }

@@ -7,6 +7,11 @@ var update = require('./update').default
 var keyboard = require('./keyboard').default
 var initialState = require('./initial_state').default
 
+var mouseClick = function(state, action) {
+  state.mouse = action.pos
+  return state
+}
+
 var reducers = function(state = initialState, action) {
     switch (action.type) {
         case 'INIT':
@@ -17,6 +22,8 @@ var reducers = function(state = initialState, action) {
             return keyboard.keyDown(state, action)
         case 'UPDATE':
             return update(state)
+        case 'MOUSE_DOWN':
+            return mouseClick(state, action)
         default:
             return state
     }
