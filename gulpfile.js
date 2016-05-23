@@ -7,11 +7,11 @@ var rename = require('gulp-rename');
 gulp.task('js:typescript', function () {
 	return gulp.src('app/js/*.ts')
 		.pipe(ts())
-		.pipe(gulp.dest('app/js'));
+		.pipe(gulp.dest('build/js/ts'));
 });
 
 gulp.task('js:browserify', function () {
-  return gulp.src('app/js/index.js')
+  return gulp.src('build/js/ts/index.js')
 		.pipe(browserify({
 		  insertGlobals : true,
 		  debug: true
