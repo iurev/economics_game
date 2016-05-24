@@ -15,7 +15,6 @@ var keyDown = function(state, action) {
     if (index === -1) {
         let newKeys = state.keys.slice();
         newKeys.push(action.keyCode);
-        console.log(newKeys)
         return Object.assign({}, state, {
             keys: newKeys
         })
