@@ -6,7 +6,15 @@ var rename = require('gulp-rename');
 
 gulp.task('js:typescript', function () {
 	return gulp.src('app/js/*.ts')
-		.pipe(ts())
+		.pipe(ts({
+				"outDir": "build/js/ts",
+        "target": "es5",
+        "module": "commonjs",
+        "declaration": false,
+        "noImplicitAny": false,
+        "removeComments": true,
+        "noLib": false
+		}))
 		.pipe(gulp.dest('build/js/ts'));
 });
 
@@ -25,7 +33,7 @@ gulp.task('js:typescript:watch', function (cb) {
 });
 
 gulp.task('js:js:watch', function (cb) {
-    gulp.watch('app/js/*.js', ['js:browserify']);
+    gulp.watch('build/js/ts/*.js', ['js:browserify']);
 });
 
 gulp.task('js:watch', ['js:typescript:watch', 'js:js:watch'])
