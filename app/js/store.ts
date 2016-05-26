@@ -14,6 +14,11 @@ var mouseClick = function(state, action) {
   return state
 }
 
+var mouseUp = function(state) {
+  state.mouse.isUp = true
+  return state
+}
+
 
 var reducers = function(state = initialState, action) {
     switch (action.type) {
@@ -27,6 +32,8 @@ var reducers = function(state = initialState, action) {
             return update(state)
         case 'MOUSE_DOWN':
             return mouseClick(state, action)
+        case 'MOUSE_UP':
+            return mouseUp(state)
         default:
             return state
     }

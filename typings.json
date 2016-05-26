@@ -2,8 +2,11 @@
   "name": "space_game",
   "dependencies": {},
   "globalDependencies": {
+    "jquery": "registry:dt/jquery#1.10.0+20160417213236",
     "node": "registry:dt/node#6.0.0+20160514165920",
+    "ractive": "registry:dt/ractive#0.0.0+20160316171810",
     "redux": "registry:dt/redux#3.3.1+20160326112656",
+    "rivets": "registry:dt/rivets#0.0.0+20160317120654",
     "rx": "registry:dt/rx#0.0.0+20160317120654",
     "three": "registry:dt/three#0.0.0+20160517065351"
   }

@@ -39,8 +39,15 @@ export default function(store) {
             pos: pos
         })
     }
+    
+    var onDocumentMouseUp = () => {
+        store().dispatch({
+            type: 'MOUSE_UP'
+        })
+    }
 
     window.addEventListener('keyup', onKeyUp)
     window.addEventListener('keydown', onKeyDown)
     document.body.addEventListener('mousedown', onDocumentMouseDown)
+    document.body.addEventListener('mouseup', onDocumentMouseUp)
 }
