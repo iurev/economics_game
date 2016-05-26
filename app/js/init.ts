@@ -19,7 +19,7 @@ var scene = function(state) {
 }
 
 var aLight = function(state) {
-    var alight = new THREE.AmbientLight(0x404040);
+    var alight = new THREE.AmbientLight(0x333333);
     var scene = state.scene.obj
     scene.add(alight)
     return state

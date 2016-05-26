@@ -8,9 +8,10 @@ var createNew = function(index, star, scene) {
         color: star.color,
         shininess: 120,
         emissive: 0xbb8383,
-        transparent: true,
-        opacity: 0.5
+        transparent: false,
+        opacity: 1
     });
+    
 
     let geometry2 = new THREE.SphereGeometry(star.r, 32, 32);
     let sphere = new THREE.Mesh(geometry2, material);
@@ -20,8 +21,8 @@ var createNew = function(index, star, scene) {
     
     views[index] = sphere
 
-    var light = new THREE.PointLight();
-    light.position.set(star.x, star.y, 0);
+    var light = new THREE.PointLight(0xffffff, 1, 30);
+    light.position.set(star.x, star.y, 5.1);
     scene.add(light);
 }
 

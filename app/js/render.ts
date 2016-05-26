@@ -5,6 +5,7 @@ import planets from './planet_view'
 import ship from './ship_view'
 import camera from './camera_view'
 import star from './star_view'
+import spaceBg from './space_bg'
 import * as THREE from 'three'
 
 export default function (state) {
@@ -14,5 +15,6 @@ export default function (state) {
     planets(state.planets, scene)
     ship(state.ship, scene)
     star(state.stars, scene)
+    spaceBg(scene)
     renderer.render(scene, cameraObj);
 }
