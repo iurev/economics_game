@@ -10,11 +10,14 @@ import {
 import updateTrade from './trade'
 
 export default function(state: State) {
-    updateCameraValues(state.camera, state.keys)
-    updateShipValues(state)
     updateTrade(state)
     if (state.keys.indexOf(27) !== -1) {
         state.trade = {}
     }
+    if(!state.trade.left) {
+        updateShipValues(state)
+    }
+    updateCameraValues(state.camera, state.keys)
+    state.mouse.isUp = false
     return state
 }

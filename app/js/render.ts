@@ -6,6 +6,7 @@ import ship from './ship_view'
 import camera from './camera_view'
 import star from './star_view'
 import trade from './trade_view'
+import { viewCallbacks } from './trade'
 import spaceBg from './space_bg'
 import * as THREE from 'three'
 
@@ -16,7 +17,7 @@ export default function (state) {
     planets(state.planets, scene)
     ship(state.ship, scene)
     star(state.stars, scene)
-    trade(state)
+    trade(state, viewCallbacks)
     spaceBg(scene)
     renderer.render(scene, cameraObj);
 }

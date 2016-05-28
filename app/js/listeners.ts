@@ -39,7 +39,7 @@ export default function(store) {
             pos: pos
         })
     }
-    
+
     var onDocumentMouseUp = () => {
         store().dispatch({
             type: 'MOUSE_UP'
@@ -48,6 +48,6 @@ export default function(store) {
 
     window.addEventListener('keyup', onKeyUp)
     window.addEventListener('keydown', onKeyDown)
-    document.body.addEventListener('mousedown', onDocumentMouseDown)
-    document.body.addEventListener('mouseup', onDocumentMouseUp)
+    document.getElementsByTagName('canvas')[0].addEventListener('mousedown', onDocumentMouseDown)
+    document.getElementsByTagName('canvas')[0].addEventListener('mouseup', onDocumentMouseUp)
 }

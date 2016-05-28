@@ -1,26 +1,54 @@
 <html>
 	<head>
 		<title>My first Three.js app</title>
+
 		<style>
 			body { margin: 0; }
 			canvas { width: 100%; height: 100% }
-			#auction {
+			#trade {
 				position: absolute;
-				bottom: 0;
+				top: 0;
 				left: 0;
 				z-index: 2;
 				background: white;
-				height: 50px;
+				height: 100%;
 				width: 100%;
 			}
+      .close {
+        position: absolute !important;
+        top: 0;
+        right: 0;
+      }
 		</style>
 	</head>
 	<body>
 		<section id="auction">
 		</section>
 		<script id='template' type='text/ractive'>
-			<p>Hello, {{left}}!</p>
+			{{#if renderObj}}
+				<div id="trade">
+          <a on-click='close' class="btn-floating btn-large waves-effect waves-light red close"><i class="material-icons">x</i></a>
+					<div class="row">
+						{{#each renderObj}}
+							<div class="col s12">{{name}}</div>
+							<div class="col s6">
+								<span>{{valueLeft}}<span>
+								<a on-click='sell' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">&gt;</i></a>
+							</div>
+							<div class="col s6">
+								<a on-click='buy' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">&lt;</i></a>
+								<span>{{valueRight}}<span>
+							</div>
+						{{/each}}
+					</div>
+				</div>
+			{{/if}}
 		</script>
 		<script src="/build/js/output_all.js"></script>
+		<!-- Compiled and minified CSS -->
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/css/materialize.min.css">
+
+		<!-- Compiled and minified JavaScript -->
+		<!--<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.6/js/materialize.min.js"></script>-->
 	</body>
 </html>

@@ -1,10 +1,11 @@
 import { State } from './initial_state';
+import { TradeActionType } from './trade';
 import * as Ractive from 'ractive';
 import 'jquery';
 
 var view = null
 
-var createNew = (left, right) => {
+var createNew = (renderObj, callbacks) => {
     view = new Ractive({
       // The `el` option can be a node, an ID, or a CSS selector.
       el: '#auction',
@@ -14,23 +15,45 @@ var createNew = (left, right) => {
       template: '#template',
 
       // Here, we're passing in some initial data
-      data: { left, right }
+      data: { renderObj }
     });
+    view.on('sell', (event) => {
+      callbacks.trade(event.context.name, TradeActionType.Sell)
+    })
+    view.on('buy', (event) => {
+      callbacks.trade(event.context.name, TradeActionType.Buy)
+    })
+    view.on('close', () => {
+      callbacks.trade(null, TradeActionType.Close)
+    })
 }
 
-var update = (left, right) => {
-  view.set('left', left)
-  view.set('right', right)
+var update = (renderObj) => {
+  view.set('renderObj', renderObj)
 }
 
-export default (state: State) => {
+export default (state: State, callbacks: any) => {
     var trade = state.trade
-    var left = state.resources[trade.left] 
-    var right = state.resources[trade.right] 
-    if (view) {
-      update(JSON.stringify(left), JSON.stringify(right))
+    var left = state.resources[trade.left]
+    var right = state.resources[trade.right]
+    var renderObj
+    if (left && right) {
+      renderObj = Object.keys(left).map(key => {
+        return {
+          name: key,
+          valueLeft: left[key],
+          valueRight: right[key]
+        }
+      })
     } else {
-      createNew(JSON.stringify(left), JSON.stringify(right))
+      renderObj = null
+    }
+
+    if (view) {
+      update(renderObj)
+    } else {
+      if (!renderObj) return
+      createNew(renderObj, callbacks)
     }
 }
 
