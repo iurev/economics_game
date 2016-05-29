@@ -5,8 +5,8 @@ import createResource from './resource'
 var easingAmount = 0.01
 var initialState = {
     obj: null,
-    x: 10,
-    y: 10,
+    x: 5,
+    y: 1,
     resourceId: null
 }
 
@@ -15,7 +15,7 @@ var getDistance = (point1, point2) => {
     var x2 = point2.x
     var y1 = point1.y
     var y2 = point2.y
-    if(!x2) x2=0; 
+    if(!x2) x2=0;
     if(!y2) y2=0;
     return Math.sqrt( Math.pow((x1-x2), 2) + Math.pow((y1-y2), 2) );
 }
@@ -40,12 +40,12 @@ export var updateValues = function(state) {
         state.planets.forEach(planet => {
             if (getDistance(planet, newCoords) <= planet.r) {
                 newCoords = ship
-            } 
+            }
         });
         state.stars.forEach(planet => {
             if (getDistance(planet, newCoords) <= planet) {
                 newCoords = ship
-            } 
+            }
         });
         ship.x = newCoords.x
         ship.y = newCoords.y
