@@ -2,7 +2,9 @@
 
 import * as THREE from 'three'
 
-var coeff = 1
+const coeff = 1
+const minZ = 40
+
 var initialState = {
   obj: null,
   fov: 10,
@@ -11,7 +13,7 @@ var initialState = {
   far: 1000,
   x: 0,
   y: 0,
-  z: 250
+  z: 200
 }
 
 var inArray = function(array, elem) {
@@ -19,13 +21,16 @@ var inArray = function(array, elem) {
 };
 
 export var updateValues = function (camera, keys) {
-    if (inArray(keys, 68)) camera.x += coeff
-    if (inArray(keys, 83)) camera.y -= coeff
-    if (inArray(keys, 65)) camera.x -= coeff
-    if (inArray(keys, 87)) camera.y += coeff
-    if (inArray(keys, 87)) camera.y += coeff
-    if (inArray(keys, 76)) camera.z += coeff
-    if (inArray(keys, 80)) camera.z -= coeff 
+    var z = camera.z
+    if (inArray(keys, 76)) z += coeff
+    if (inArray(keys, 80)) z -= coeff
+    if (z < minZ) z = minZ
+    camera.z = z
+    var horCoeff = coeff / ( 250 / z )
+    if (inArray(keys, 68)) camera.x += horCoeff
+    if (inArray(keys, 83)) camera.y -= horCoeff
+    if (inArray(keys, 65)) camera.x -= horCoeff
+    if (inArray(keys, 87)) camera.y += horCoeff
 }
 
 export var init = function(state) {
