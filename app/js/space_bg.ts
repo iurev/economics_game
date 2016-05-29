@@ -1,33 +1,79 @@
 /// <reference path="../../typings/index.d.ts" />
 
 import * as THREE from 'three'
-var url = "/space.jpg"
+import SPE from './spe'
 
-var callback = (_: THREE.Scene) => {}
-
-var onLoad = () => {
-	callback = (scene: THREE.Scene) => {
-		  var spacesphereGeo = new THREE.SphereGeometry(500,20,20);
-			var spacesphereMat = new THREE.MeshPhongMaterial();
-			spacesphereMat.map = spacetex;
-
-			var spacesphere = new THREE.Mesh(spacesphereGeo,spacesphereMat);
-			
-			//spacesphere needs to be double sided as the camera is within the spacesphere
-			spacesphere.material.side = THREE.DoubleSide;
-			
-			spacesphere.material.map.wrapS = THREE.RepeatWrapping; 
-			spacesphere.material.map.wrapT = THREE.RepeatWrapping;
-			spacesphere.material.map.repeat.set( 50, 20);
-			spacesphere.position.z = -500
-			scene.add(spacesphere);	
-			
-			callback = (_: THREE.Scene) => {}
-	}
+const particleUrl = 'app/smokeparticle.png'
+const spaceBgParams = {
+    color: 0x5657d7,
+    opacity: 0.5,
+    transparent: true
+}
+const particleGroupProperties = {
+    texture: {
+        value: THREE.ImageUtils.loadTexture(particleUrl)
+    }
 }
 
-var spacetex = THREE.ImageUtils.loadTexture(url, null, onLoad)
+var particleGroup
+
+const randomStarColor = () => {
+    var color
+    if (Math.random() < 0.1) {
+        color = 'red'
+    } else {
+        color = 'white'
+    }
+    return new THREE.Color(color)
+}
+
+const emitterProperties = (i) => {
+    return {
+        type: i,
+        maxAge: {
+            value: 1
+        },
+        position: {
+            value: new THREE.Vector3(-5 + (i * 2.5), 4, -5),
+            radius: 5,
+            spread: new THREE.Vector3( 200, 200, 0),
+            distribution: SPE.distributions.DISC
+        },
+
+        color: {
+            value: randomStarColor()
+        },
+        size: {
+            value: i*3
+        },
+        isStatic: true,
+        particleCount: 120
+    }
+}
+
+const initParticles = (scene) => {
+    particleGroup = new SPE.Group(particleGroupProperties)
+
+    for (let i = 1; i <4; i++) {
+      let emitter = new SPE.Emitter(emitterProperties(i))
+      particleGroup.addEmitter(emitter)
+    }
+
+    scene.add( particleGroup.mesh )
+}
+
+var callback = (scene: THREE.Scene) => {
+    var geometry = new THREE.BoxGeometry( 500, 500, 1 );
+    var material = new THREE.MeshPhongMaterial(spaceBgParams)
+    var box = new THREE.Mesh(geometry, material)
+    box.position.z = -10
+    scene.add(box);
+    initParticles(scene)
+    particleGroup.tick()
+
+    callback = (_: THREE.Scene) => { }
+}
 
 export default (scene: THREE.Scene) => {
-	callback(scene)
+    callback(scene)
 }
