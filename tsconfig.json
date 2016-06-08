@@ -4,9 +4,9 @@
         "module": "commonjs",
         "declaration": false,
         "noImplicitAny": false,
-        "removeComments": true,
+        "removeComments": false,
         "noLib": false,
-        "outFile": "build/js/output.js"
+				"sourceMap": true
     },
     "exclude": [
         "node_modules",
