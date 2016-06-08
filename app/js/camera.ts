@@ -17,20 +17,20 @@ var initialState = {
 }
 
 var inArray = function(array, elem) {
-    return array.indexOf(elem) != -1
+  return array.indexOf(elem) != -1
 };
 
-export var updateValues = function (camera, keys) {
-    var z = camera.z
-    if (inArray(keys, 76)) z += coeff
-    if (inArray(keys, 80)) z -= coeff
-    if (z < minZ) z = minZ
-    camera.z = z
-    var horCoeff = coeff / ( 250 / z )
-    if (inArray(keys, 68)) camera.x += horCoeff
-    if (inArray(keys, 83)) camera.y -= horCoeff
-    if (inArray(keys, 65)) camera.x -= horCoeff
-    if (inArray(keys, 87)) camera.y += horCoeff
+export var updateValues = function(camera, keys) {
+  var z = camera.z
+  if (inArray(keys, 76)) z += coeff
+  if (inArray(keys, 80)) z -= coeff
+  if (z < minZ) z = minZ
+  camera.z = z
+  var horCoeff = coeff / (250 / z)
+  if (inArray(keys, 68)) camera.x += horCoeff
+  if (inArray(keys, 83)) camera.y -= horCoeff
+  if (inArray(keys, 65)) camera.x -= horCoeff
+  if (inArray(keys, 87)) camera.y += horCoeff
 }
 
 export var init = function(state) {

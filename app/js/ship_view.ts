@@ -5,30 +5,30 @@ var view = null
 var light = null
 
 var createNew = function name(ship, scene) {
-  var geometry = new THREE.BoxGeometry( 0.5, 0.2, 0.2 );
-  var material = new THREE.MeshLambertMaterial( {color: 0x00ff00} );
-  var cube = new THREE.Mesh( geometry, material );
+  var geometry = new THREE.BoxGeometry(0.5, 0.2, 0.2);
+  var material = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
+  var cube = new THREE.Mesh(geometry, material);
   view = cube
-   view.rotateX(45);
-   view.rotateY(45);
+  view.rotateX(45);
+  view.rotateY(45);
 
-    light = new THREE.PointLight(0xffffff, 2, 1);
-    scene.add(light);
-    
+  light = new THREE.PointLight(0xffffff, 2, 1);
+  scene.add(light);
+
   updateValues(ship)
-  scene.add( cube )
+  scene.add(cube)
 }
 
-var updateValues = function (ship) {
-    view.position.x = ship.x
-    view.position.y = ship.y
-    light.position.set(ship.x, ship.y, 1);
+var updateValues = function(ship) {
+  view.position.x = ship.x
+  view.position.y = ship.y
+  light.position.set(ship.x, ship.y, 1);
 }
 
 export default function(ship, scene: THREE.Scene) {
-    if (view) {
-        updateValues(ship)
-    } else {
-        createNew(ship, scene)
-    }
+  if (view) {
+    updateValues(ship)
+  } else {
+    createNew(ship, scene)
+  }
 }

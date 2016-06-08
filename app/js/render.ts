@@ -10,14 +10,14 @@ import { viewCallbacks } from './trade'
 import spaceBg from './space_bg'
 import * as THREE from 'three'
 
-export default function (state) {
-    var scene = state.scene.obj
-    var renderer = state.renderer.obj
-    var cameraObj = camera(state.camera)
-    planets(state.planets, scene)
-    ship(state.ship, scene)
-    star(state.stars, scene)
-    trade(state, viewCallbacks)
-    spaceBg(scene)
-    renderer.render(scene, cameraObj);
+export default function(state) {
+  var scene = state.scene.obj
+  var renderer = state.renderer.obj
+  var cameraObj = camera(state.camera)
+  planets(state.planets, scene)
+  ship(state.ship, scene)
+  star(state.stars, scene)
+  trade(state, viewCallbacks)
+  spaceBg(scene)
+  renderer.render(scene, cameraObj);
 }

@@ -1,25 +1,25 @@
 /// <reference path="../../typings/index.d.ts" />
 import * as THREE from 'three'
 
-var view = null
+let view = null
 
-var createNew = function name(camera) {
+const createNew = (camera) => {
   view = new THREE.PerspectiveCamera(camera.fov, camera.aspect, camera.near, camera.far);
   camera.obj = view
   updateValues(camera)
 }
 
-var updateValues = function (camera) {
-    view.position.x = camera.x
-    view.position.y = camera.y
-    view.position.z = camera.z
+const updateValues = (camera) => {
+  view.position.x = camera.x
+  view.position.y = camera.y
+  view.position.z = camera.z
 }
 
 export default function(camera) {
-    if (view) {
-        updateValues(camera)
-    } else {
-        createNew(camera)
-    }
-    return view
+  if (view) {
+    updateValues(camera)
+  } else {
+    createNew(camera)
+  }
+  return view
 }
