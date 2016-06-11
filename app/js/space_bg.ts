@@ -1,5 +1,3 @@
-/// <reference path="../../typings/index.d.ts" />
-
 import * as THREE from 'three'
 import SPE from './spe'
 
@@ -15,10 +13,10 @@ const particleGroupProperties = {
   }
 }
 
-var particleGroup
+let particleGroup
 
 const randomStarColor = () => {
-  var color
+  let color
   if (Math.random() < 0.1) {
     color = 'red'
   } else {
@@ -62,12 +60,12 @@ const initParticles = (scene) => {
   scene.add(particleGroup.mesh)
 }
 
-var callback = (scene: THREE.Scene) => {
-  var geometry = new THREE.BoxGeometry(500, 500, 1);
-  var material = new THREE.MeshPhongMaterial(spaceBgParams)
-  var box = new THREE.Mesh(geometry, material)
+let callback = (scene: THREE.Scene) => {
+  let geometry = new THREE.BoxGeometry(500, 500, 1)
+  let material = new THREE.MeshPhongMaterial(spaceBgParams)
+  let box = new THREE.Mesh(geometry, material)
   box.position.z = -10
-  scene.add(box);
+  scene.add(box)
   initParticles(scene)
   particleGroup.tick()
 

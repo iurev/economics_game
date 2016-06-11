@@ -1,6 +1,3 @@
-/// <reference path="../../typings/index.d.ts" />
-
-import { State } from './initial_state'
 import {
   updateValues as updateCameraValues
 } from './camera'
@@ -9,7 +6,7 @@ import {
 } from './ship'
 import updateTrade from './trade'
 
-export default function(state: State) {
+export default (state: State) => {
   updateTrade(state)
   if (state.keys.indexOf(27) !== -1) {
     state.trade = {}

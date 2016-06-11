@@ -1,11 +1,10 @@
-import { State } from './initial_state';
 import { TradeActionType } from './trade';
 import * as Ractive from 'ractive';
 import 'jquery';
 
-var view = null
+let view = undefined
 
-var createNew = (renderObj, callbacks) => {
+const createNew = (renderObj, callbacks) => {
   view = new Ractive({
     // The `el` option can be a node, an ID, or a CSS selector.
     el: '#auction',
@@ -24,19 +23,19 @@ var createNew = (renderObj, callbacks) => {
     callbacks.trade(event.context.name, TradeActionType.Buy)
   })
   view.on('close', () => {
-    callbacks.trade(null, TradeActionType.Close)
+    callbacks.trade(undefined, TradeActionType.Close)
   })
 }
 
-var update = (renderObj) => {
+const update = (renderObj) => {
   view.set('renderObj', renderObj)
 }
 
 export default (state: State, callbacks: any) => {
-  var trade = state.trade
-  var left = state.resources[trade.left]
-  var right = state.resources[trade.right]
-  var renderObj
+  let trade = state.trade
+  let left = state.resources[trade.left]
+  let right = state.resources[trade.right]
+  let renderObj
   if (left && right) {
     renderObj = Object.keys(left).map(key => {
       return {
@@ -46,7 +45,7 @@ export default (state: State, callbacks: any) => {
       }
     })
   } else {
-    renderObj = null
+    renderObj = undefined
   }
 
   if (view) {

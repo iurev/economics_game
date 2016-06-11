@@ -1,26 +1,22 @@
-/// <reference path="../../typings/index.d.ts" />
-
 import * as redux from 'redux'
 import init from './init'
 import update from './update'
 import keyboard from './keyboard'
 import initialState from './initial_state'
 
-var createStore = redux.createStore;
+const createStore = redux.createStore
 
-
-var mouseClick = function(state, action) {
+const mouseClick = (state, action) => {
   state.mouse = action.pos
   return state
 }
 
-var mouseUp = function(state) {
+const mouseUp = (state) => {
   state.mouse.isUp = true
   return state
 }
 
-
-var reducers = function(state = initialState, action) {
+const reducers = (state = initialState, action) => {
   switch (action.type) {
     case 'INIT':
       return init(state)
@@ -39,8 +35,8 @@ var reducers = function(state = initialState, action) {
   }
 }
 
-var store = createStore(reducers)
+const store = createStore(reducers)
 
-export default function() {
-  return store;
+export default () => {
+  return store
 }

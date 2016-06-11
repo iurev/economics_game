@@ -1,4 +1,3 @@
-/// <reference path="../../typings/index.d.ts" />
 import * as THREE from 'three'
 import SPE from './spe'
 
@@ -34,14 +33,14 @@ const emitterProperties = (position) => {
   }
 }
 
-var particleGroup, clock;
-var views = {}
+let particleGroup, clock;
+let views = {}
 
 const addParticles = (scene, star) => {
-  var position = new THREE.Vector3(star.x, star.y, 0)
+  let position = new THREE.Vector3(star.x, star.y, 0)
   clock = new THREE.Clock()
   particleGroup = new SPE.Group(speGroupProperties)
-  var emitter = new SPE.Emitter(emitterProperties(position))
+  let emitter = new SPE.Emitter(emitterProperties(position))
   particleGroup.addEmitter(emitter)
   scene.add(particleGroup.mesh)
 }
@@ -52,7 +51,7 @@ const update = () => {
 }
 
 const addLight = (scene: THREE.Scene, star) => {
-  var light = new THREE.PointLight(0xffffff, 1, 50);
+  let light = new THREE.PointLight(0xffffff, 1, 50);
   light.position.set(star.x, star.y, star.z)
   scene.add(light)
 }
@@ -65,8 +64,8 @@ const createNew = (index, star, scene) => {
   addLight(scene, star)
 }
 
-export default function(stars, scene, delta) {
-  stars.forEach(function(star, index) {
+export default (stars, scene) => {
+  stars.forEach((star, index) => {
     if (!views[index]) {
       createNew(index, star, scene)
     } else {

@@ -1,31 +1,30 @@
-/// <reference path="../../typings/index.d.ts" />
 import * as THREE from 'three'
 
-var view = null
-var light = null
+let view = undefined
+let light = undefined
 
-var createNew = function name(ship, scene) {
-  var geometry = new THREE.BoxGeometry(0.5, 0.2, 0.2);
-  var material = new THREE.MeshLambertMaterial({ color: 0x00ff00 });
-  var cube = new THREE.Mesh(geometry, material);
+const createNew = (ship, scene) => {
+  let geometry = new THREE.BoxGeometry(0.5, 0.2, 0.2)
+  let material = new THREE.MeshLambertMaterial({ color: 0x00ff00 })
+  let cube = new THREE.Mesh(geometry, material)
   view = cube
-  view.rotateX(45);
-  view.rotateY(45);
+  view.rotateX(45)
+  view.rotateY(45)
 
-  light = new THREE.PointLight(0xffffff, 2, 1);
-  scene.add(light);
+  light = new THREE.PointLight(0xffffff, 2, 1)
+  scene.add(light)
 
   updateValues(ship)
   scene.add(cube)
 }
 
-var updateValues = function(ship) {
+let updateValues = (ship) => {
   view.position.x = ship.x
   view.position.y = ship.y
-  light.position.set(ship.x, ship.y, 1);
+  light.position.set(ship.x, ship.y, 1)
 }
 
-export default function(ship, scene: THREE.Scene) {
+export default (ship, scene: THREE.Scene) => {
   if (view) {
     updateValues(ship)
   } else {

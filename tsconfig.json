@@ -9,7 +9,10 @@
 				"sourceMap": true
     },
     "exclude": [
-        "node_modules",
-        "typings"
-    ]
+        "node_modules"
+    ],
+		"files": [
+			"typings/index.d.ts",
+			"app/js/index.d.ts"
+		]
 }

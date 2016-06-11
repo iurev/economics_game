@@ -1,13 +1,9 @@
-/// <reference path="../../typings/index.d.ts" />
-
-'use strict'
-
+import * as THREE from 'three'
 import store from './store'
 import render from './render'
 import addListeners from './listeners'
-import * as THREE from 'three'
 
-var gameLoop = function() {
+const gameLoop = () => {
   requestAnimationFrame(gameLoop)
   store().dispatch({ type: 'UPDATE_VALUES' })
   render(store().getState())

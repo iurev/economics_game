@@ -1,5 +1,5 @@
-var keyUp = function(state, action) {
-  var index = state.keys.indexOf(action.keyCode)
+const keyUp = (state, action) => {
+  let index = state.keys.indexOf(action.keyCode)
   if (index !== -1) {
     let newKeys = state.keys.slice();
     newKeys.splice(index, 1);
@@ -10,8 +10,8 @@ var keyUp = function(state, action) {
   return state
 }
 
-var keyDown = function(state, action) {
-  var index = state.keys.indexOf(action.keyCode)
+const keyDown = (state, action) => {
+  let index = state.keys.indexOf(action.keyCode)
   if (index === -1) {
     let newKeys = state.keys.slice();
     newKeys.push(action.keyCode);

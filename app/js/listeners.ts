@@ -1,37 +1,37 @@
 import * as THREE from 'three'
-var mouse = new THREE.Vector2()
+let mouse = new THREE.Vector2()
 
-export default function(store) {
-  var onKeyUp = function(event) {
+export default (store) => {
+  const onKeyUp = (event) => {
     store().dispatch({
       type: 'KEYBOARD_KEYUP',
       keyCode: event.keyCode
     })
   }
 
-  var onKeyDown = function(event) {
+  const onKeyDown = (event) => {
     store().dispatch({
       type: 'KEYBOARD_KEYDOWN',
       keyCode: event.keyCode
     })
   }
 
-  function onDocumentMouseDown(event) {
-    var state = store().getState()
-    var scene = state.scene.obj
-    var camera = state.camera.obj
-    var renderer = state.renderer.obj
+  const onDocumentMouseDown = (event) => {
+    let state = store().getState()
+    let scene = state.scene.obj
+    let camera = state.camera.obj
+    let renderer = state.renderer.obj
 
-    event.preventDefault();
+    event.preventDefault()
 
-    mouse.x = (event.clientX / renderer.domElement.width) * 2 - 1;
-    mouse.y = -(event.clientY / renderer.domElement.height) * 2 + 1;
+    mouse.x = (event.clientX / renderer.domElement.width) * 2 - 1
+    mouse.y = -(event.clientY / renderer.domElement.height) * 2 + 1
 
-    var vector = new THREE.Vector3(mouse.x, mouse.y, 0.5);
-    vector.unproject(camera);
-    var dir = vector.sub(camera.position).normalize();
-    var distance = -camera.position.z / dir.z;
-    var pos = camera.position.clone().add(dir.multiplyScalar(distance));
+    let vector = new THREE.Vector3(mouse.x, mouse.y, 0.5)
+    vector.unproject(camera)
+    let dir = vector.sub(camera.position).normalize()
+    let distance = -camera.position.z / dir.z
+    let pos = camera.position.clone().add(dir.multiplyScalar(distance))
     pos.z = 250
 
     store().dispatch({
@@ -40,7 +40,7 @@ export default function(store) {
     })
   }
 
-  var onDocumentMouseUp = () => {
+  let onDocumentMouseUp = () => {
     store().dispatch({
       type: 'MOUSE_UP'
     })

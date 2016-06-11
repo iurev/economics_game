@@ -1,7 +1,4 @@
-/// <reference path="../../typings/index.d.ts" />
-import * as THREE from 'three'
-
-var initialState = [{
+const initialState = [{
   x: 1,
   y: 8,
   color: 0xffff00,
@@ -9,6 +6,6 @@ var initialState = [{
   z: 15
 }]
 
-export var init = function(state) {
+export const init = (state) => {
   state.stars = initialState
 }
