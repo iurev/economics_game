@@ -12,8 +12,9 @@
     "babelify": "^7.3.0",
     "commonjs": "0.0.1",
     "gulp": "^3.9.1",
-    "webpack-livereload-plugin": "^0.8.1",
-    "ts-loader": "^0.8.2"
+    "lodash": "^4.13.1",
+    "ts-loader": "^0.8.2",
+    "webpack-livereload-plugin": "^0.8.1"
   },
   "dependencies": {
     "immutable": "^3.8.1",

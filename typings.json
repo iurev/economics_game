@@ -1,8 +1,11 @@
 {
   "name": "space_game",
-  "dependencies": {},
+  "dependencies": {
+    "lodash": "registry:npm/lodash#4.0.0+20160416211519"
+  },
   "globalDependencies": {
     "jquery": "registry:dt/jquery#1.10.0+20160417213236",
+    "lodash": "registry:global/lodash#4.0.0+20160412191414",
     "node": "registry:dt/node#6.0.0+20160514165920",
     "ractive": "registry:dt/ractive#0.0.0+20160316171810",
     "redux": "registry:dt/redux#3.3.1+20160326112656",
