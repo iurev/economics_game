@@ -35,7 +35,6 @@ const openTradeLogic = (state) => {
   let trade = state.trade || {}
   let ship = state.ship
   if (state.trade.left) return
-  // console.log('asdf')
   state.planets.forEach(planet => {
     let distanceCondition = getDistance(planet, ship) <= planet.r * 1.2
     let clickCondition = getDistance(planet, state.mouse) <= planet.r * 1.2

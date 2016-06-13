@@ -11,4 +11,4 @@ const gameLoop = () => {
 
 store().dispatch({ type: 'INIT' })
 addListeners(store)
-gameLoop();
+gameLoop()
