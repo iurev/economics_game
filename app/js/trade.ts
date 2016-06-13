@@ -5,7 +5,6 @@ interface TradeAction {
 
 let tradeAction: TradeAction = {}
 
-// you can buy or sell products
 export enum TradeActionType {
   Buy,
   Sell,
