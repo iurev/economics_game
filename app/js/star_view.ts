@@ -51,8 +51,9 @@ const update = () => {
 }
 
 const addLight = (scene: THREE.Scene, star) => {
-  let light = new THREE.PointLight(0xffffff, 1, 50);
-  light.position.set(star.x, star.y, star.z)
+  // let light = new THREE.PointLight(0xffffff, 1, 50);
+  let light = new THREE.AmbientLight(undefined, 1)
+  // light.position.set(star.x, star.y, star.z)
   scene.add(light)
 }
 
