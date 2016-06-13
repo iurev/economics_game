@@ -8,6 +8,7 @@ interface State {
   ship: any,
   mouse: any,
   keys: Array<any>
+  stocks: any,
   resources: any,
-  trade: any
+  trade: Trade
 }

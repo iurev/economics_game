@@ -15,6 +15,7 @@ export default {
     y: undefined
   },
   keys: [],
+  stocks: {},
   resources: {},
   trade: {}
 }

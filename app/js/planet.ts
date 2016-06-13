@@ -1,12 +1,6 @@
-import createResource from './resource'
+/// <reference path="./planet.d.ts" />
 
-interface Planet {
-  x: number,
-  y: number,
-  r: number,
-  color?: any,
-  resourceId?: number
-}
+import createStock from './stock'
 
 const initialState: Array<Planet> = [{
   x: 0,
@@ -28,6 +22,6 @@ const initialState: Array<Planet> = [{
 export const init = (state) => {
   let planets = state.planets = initialState
   planets.forEach((planet) => {
-    planet.resourceId = createResource(state)
+    planet.stockId = createStock(state)
   })
 }

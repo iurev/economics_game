@@ -1,4 +1,6 @@
-import createResource from './resource'
+/// <reference path="./ship.d.ts" />
+
+import createStock from './stock'
 
 const easingAmount = 0.01
 const initialState: Ship = {
@@ -50,5 +52,5 @@ export const updateValues = (state) => {
 
 export const init = (state) => {
   state.ship = initialState
-  state.ship.resourceId = createResource(state)
+  state.ship.stockId = createStock(state)
 }

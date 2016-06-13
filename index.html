@@ -33,10 +33,10 @@
 							<div class="col s12">{{name}}</div>
 							<div class="col s6">
 								<span>{{valueLeft}}<span>
-								<a on-click='sell' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">&gt;</i></a>
+								<a on-click='sell' class="btn waves-effect waves-light">{{priceLeft}}$ &gt;</a>
 							</div>
 							<div class="col s6">
-								<a on-click='buy' class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">&lt;</i></a>
+								<a on-click='buy' class="btn waves-effect waves-light">&lt; {{priceRight}}$</a>
 								<span>{{valueRight}}<span>
 							</div>
 						{{/each}}

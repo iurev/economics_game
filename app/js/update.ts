@@ -11,7 +11,7 @@ export default (state: State) => {
   if (state.keys.indexOf(27) !== -1) {
     state.trade = {}
   }
-  if (!state.trade.left) {
+  if (!state.trade.leftStockId) {
     updateShipValues(state)
   }
   updateCameraValues(state.camera, state.keys)

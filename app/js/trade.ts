@@ -1,3 +1,9 @@
+/// <reference path="./resource.d.ts" />
+/// <reference path="./trade.d.ts" />
+
+import { transaction} from './resource'
+import { getById } from './db'
+
 interface TradeAction {
   name?: string,
   action?: TradeActionType
@@ -31,43 +37,41 @@ export const viewCallbacks = {
 }
 
 const openTradeLogic = (state) => {
-  let trade = state.trade || {}
+  let trade: Trade = state.trade || {}
   let ship = state.ship
   if (state.trade.left) return
   state.planets.forEach(planet => {
     let distanceCondition = getDistance(planet, ship) <= planet.r * 1.2
     let clickCondition = getDistance(planet, state.mouse) <= planet.r * 1.2
     if (distanceCondition && clickCondition && state.mouse.isUp) {
-      trade.left = ship.resourceId
-      trade.right = planet.resourceId
+      trade.leftStockId = ship.stockId
+      trade.rightStockId = planet.stockId
       state.trade = trade
       return
     }
   });
 }
 
-const tradeLogic = (state) => {
-  let trade = state.trade || {}
-  let left = state.resources[trade.left]
-  let right = state.resources[trade.right]
+const tradeLogic = (state: State) => {
+  let trade = state.trade
   let name = tradeAction.name
   let action = tradeAction.action
-  let tmpLeftValue
-  let tmpRightValue
-  if (left && right && tradeAction.name && tradeAction.action !== undefined) {
-    if (action === TradeActionType.Sell) {
-      tmpLeftValue = left[name] - 1
-      tmpRightValue = right[name] + 1
-    } else if (action === TradeActionType.Buy) {
-      tmpLeftValue = left[name] + 1
-      tmpRightValue = right[name] - 1
-    }
-    if ((tmpLeftValue >= 0) && (tmpRightValue >= 0)) {
-      left[name] = tmpLeftValue
-      right[name] = tmpRightValue
-    }
+
+  if (!trade.leftStockId) return
+  if (!trade.rightStockId) return
+  if (!tradeAction.name) return
+  if (tradeAction.action === undefined) return
+
+  let leftStock: Stock = getById(state, 'stocks', trade.leftStockId)
+  let rightStock: Stock = getById(state, 'stocks', trade.rightStockId)
+  let leftResourceId: number = leftStock[`${name}ResourceId`]
+  let rightResourceId: number = rightStock[`${name}ResourceId`]
+
+  if (action === TradeActionType.Sell) {
+    transaction(state, leftResourceId, rightResourceId, -1)
+  } else if (action === TradeActionType.Buy) {
+    transaction(state, leftResourceId, rightResourceId, 1)
   }
-  state.trade = trade
 }
 
 const maybeClose = (state) => {
