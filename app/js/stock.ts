@@ -2,9 +2,14 @@
 /// <reference path="./camera.d.ts" />
 /// <reference path="./initial_state.d.ts" />
 /// <reference path="./stock.d.ts" />
+/// <reference path="./planet.d.ts" />
 
 import { create } from './db'
 import createResource from './resource'
+
+export const update = (state: State, stockId: number) => {
+
+}
 
 export default (state: State): number => {
   let stock: Stock = {

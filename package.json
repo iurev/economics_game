@@ -4,7 +4,7 @@
   "description": "",
   "main": "js/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "karma start karma.conf.js"
   },
   "author": "wwju",
   "license": "ISC",
@@ -12,8 +12,15 @@
     "babelify": "^7.3.0",
     "commonjs": "0.0.1",
     "gulp": "^3.9.1",
+    "jasmine-core": "^2.4.1",
+    "karma": "^0.13.22",
+    "karma-jasmine": "^1.0.2",
+    "karma-phantomjs-launcher": "^1.0.0",
+    "karma-webpack": "^1.7.0",
     "lodash": "^4.13.1",
+    "phantomjs-prebuilt": "^2.1.7",
     "ts-loader": "^0.8.2",
+    "typescript": "^1.8.10",
     "webpack-livereload-plugin": "^0.8.1"
   },
   "dependencies": {
