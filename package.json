@@ -4,7 +4,8 @@
   "description": "",
   "main": "js/index.js",
   "scripts": {
-    "test": "karma start karma.conf.js"
+    "test": "karma start karma.conf.js",
+		"start": "webpack-dev-server"
   },
   "author": "wwju",
   "license": "ISC",
