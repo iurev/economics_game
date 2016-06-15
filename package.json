@@ -4,8 +4,8 @@
   "description": "",
   "main": "js/index.js",
   "scripts": {
-    "test": "karma start karma.conf.js",
-    "start": "webpack-dev-server",
+    "test": "node_modules/.bin/karma start karma.conf.js",
+    "start": "node_modules/.bin/webpack-dev-server",
 		"coverage": "node_modules/.bin/remap-istanbul -i coverage/phantomjs/coverage-final.json -o coverage/coverage.json && node_modules/.bin/istanbul report lcov html "
   },
   "author": "wwju",
