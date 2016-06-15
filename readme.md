@@ -22,3 +22,9 @@ npm start
 ```
 npm test
 ```
+
+## For regenerate tests coverage
+
+```
+npm run coverage
+```
