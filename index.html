@@ -33,10 +33,14 @@
 							<div class="col s12">{{name}}</div>
 							<div class="col s6">
 								<span>{{valueLeft}}<span>
-								<a on-click='sell' class="btn waves-effect waves-light">{{priceLeft}}$ &gt;</a>
+								{{#if valueLeft}}
+									<a on-click='sell' class="btn waves-effect waves-light">{{priceLeft}}$ &gt;</a>
+								{{/if}}
 							</div>
 							<div class="col s6">
-								<a on-click='buy' class="btn waves-effect waves-light">&lt; {{priceRight}}$</a>
+								{{#if valueRight}}
+									<a on-click='buy' class="btn waves-effect waves-light">&lt; {{priceRight}}$</a>
+								{{/if}}
 								<span>{{valueRight}}<span>
 							</div>
 						{{/each}}

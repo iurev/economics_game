@@ -13,6 +13,7 @@ describe('Resource', () => {
   describe('#update', () => {
     let previousAmount: number
     let resource: Resource
+    let previousResource: Resource
     let resourceId: number
     let state: State
 
@@ -20,6 +21,7 @@ describe('Resource', () => {
       state = clone(initialState)
       resourceId = create(state)
       resource = getResourceById(state, resourceId)
+      previousResource = clone(resource)
       previousAmount = resource.amount
     })
 
@@ -42,6 +44,20 @@ describe('Resource', () => {
       update(state, resourceId, diff)
       let newAmount = resource.amount
       expect(newAmount).toEqual(0)
+    })
+
+    it('should update price', () => {
+      let diff = 20
+      update(state, resourceId, diff)
+      expect(resource.buyPrice).toBeLessThan(previousResource.buyPrice)
+      expect(resource.sellPrice).toBeLessThan(previousResource.sellPrice)
+    })
+
+    it('should update price', () => {
+      let diff = -Math.round(resource.amount / 2)
+      update(state, resourceId, diff)
+      expect(resource.buyPrice).toBeGreaterThan(previousResource.buyPrice)
+      expect(resource.sellPrice).toBeGreaterThan(previousResource.sellPrice)
     })
   })
 

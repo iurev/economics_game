@@ -5,6 +5,7 @@
 /// <reference path="./resource.d.ts" />
 
 import { create, getResourceById, getStockById } from './db'
+import { clone } from 'lodash'
 
 export const ResourceTypes = ['food', 'machines', 'energy']
 
@@ -19,8 +20,18 @@ export const update = (state: State, resourceId: number, amount: number) => {
   let newAmount = resource.amount + amount
   if (newAmount < 0) newAmount = 0
   resource.amount = newAmount
-  resource.buyPrice = 8
-  resource.sellPrice = 10
+  resource.buyPrice = getBuyPrice(newAmount)
+  resource.sellPrice = getSellPrice(newAmount)
+}
+
+const getBuyPrice = (amount: number) => {
+  if (!amount) amount = 1
+  return Math.round(100 / amount)
+}
+
+const getSellPrice = (amount: number) => {
+  if (!amount) amount = 1
+  return Math.round(120 / amount)
 }
 
 export const transaction = (state: State, leftResourceId: number, rightResourceId: number, amount: number): boolean => {
@@ -43,5 +54,8 @@ export const getResource = (state, stockId: number, resourceName: string): Resou
 }
 
 export default (state: State): number => {
-  return create(state, 'resources', initialState)
+  let resource: Resource = clone(initialState)
+  resource.buyPrice = getBuyPrice(resource.amount)
+  resource.sellPrice = getSellPrice(resource.amount)
+  return create(state, 'resources', resource)
 }
