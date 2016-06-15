@@ -5,7 +5,8 @@
   "main": "js/index.js",
   "scripts": {
     "test": "karma start karma.conf.js",
-		"start": "webpack-dev-server"
+    "start": "webpack-dev-server",
+		"coverage": "node_modules/.bin/remap-istanbul -i coverage/phantomjs/coverage-final.json -o coverage/coverage.json && node_modules/.bin/istanbul report lcov html "
   },
   "author": "wwju",
   "license": "ISC",
@@ -13,13 +14,17 @@
     "babelify": "^7.3.0",
     "commonjs": "0.0.1",
     "gulp": "^3.9.1",
+    "istanbul-instrumenter-loader": "^0.2.0",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.22",
+    "karma-coverage": "^1.0.0",
     "karma-jasmine": "^1.0.2",
     "karma-phantomjs-launcher": "^1.0.0",
+    "karma-remap-istanbul": "^0.1.0",
     "karma-webpack": "^1.7.0",
     "lodash": "^4.13.1",
     "phantomjs-prebuilt": "^2.1.7",
+    "remap-istanbul": "^0.6.4",
     "ts-loader": "^0.8.2",
     "typescript": "^1.8.10",
     "webpack-livereload-plugin": "^0.8.1"

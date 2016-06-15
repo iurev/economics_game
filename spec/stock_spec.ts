@@ -10,5 +10,6 @@ describe('Stock', () => {
   it('should be a function', () => {
     // example spec
     expect(typeof update).toEqual('function')
+    expect(update()).toEqual(1)
   })
 })

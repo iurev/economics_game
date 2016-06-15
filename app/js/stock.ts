@@ -7,8 +7,8 @@
 import { create } from './db'
 import createResource from './resource'
 
-export const update = (state: State, stockId: number) => {
-
+export const update = () => {
+  return 1
 }
 
 export default (state: State): number => {
