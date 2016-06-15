@@ -6,14 +6,14 @@
 
 import { create, getStockById, getResourceById } from './db'
 import createResource from './resource'
-import { ResourceTypes, getResource } from './resource'
+import { update as updateResource } from './resource'
+import { ResourceTypes } from './resource'
 import { random } from 'lodash'
 
 export const update = (state: State, stockId: number) => {
   let stock: Stock = getStockById(state, stockId)
   ResourceTypes.forEach((resourceName) => {
-    let resource: Resource = getResource(state, stockId, resourceName)
-    resource.amount += random(-5, 5)
+    updateResource(state, stock[`${resourceName}ResourceId`], random(-5, 5))
   })
 }
 
