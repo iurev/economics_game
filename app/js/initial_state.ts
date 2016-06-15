@@ -17,5 +17,10 @@ export default {
   keys: [],
   stocks: {},
   resources: {},
-  trade: {}
+  trade: {},
+  gameInfo: {
+    planets: {
+      lastUpdatedResourceTime: 0
+    }
+  }
 }

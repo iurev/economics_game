@@ -3,9 +3,9 @@ import store from './store'
 import render from './render'
 import addListeners from './listeners'
 
-const gameLoop = () => {
+const gameLoop = (time: number = undefined) => {
   requestAnimationFrame(gameLoop)
-  store().dispatch({ type: 'UPDATE_VALUES' })
+  store().dispatch({ type: 'UPDATE_VALUES', time: time })
   render(store().getState())
 }
 

@@ -25,7 +25,7 @@ const reducers = (state = initialState, action) => {
     case 'KEYBOARD_KEYDOWN':
       return keyboard.keyDown(state, action)
     case 'UPDATE_VALUES':
-      return update(state)
+      return update(state, action.time)
     case 'MOUSE_DOWN':
       return mouseClick(state, action)
     case 'MOUSE_UP':

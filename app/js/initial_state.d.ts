@@ -10,5 +10,6 @@ interface State {
   keys: Array<any>
   stocks: any,
   resources: any,
-  trade: Trade
+  trade: Trade,
+  gameInfo: any
 }

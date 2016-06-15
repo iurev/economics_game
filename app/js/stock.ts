@@ -4,11 +4,17 @@
 /// <reference path="./stock.d.ts" />
 /// <reference path="./planet.d.ts" />
 
-import { create } from './db'
+import { create, getStockById, getResourceById } from './db'
 import createResource from './resource'
+import { ResourceTypes, getResource } from './resource'
+import { random } from 'lodash'
 
-export const update = () => {
-  return 1
+export const update = (state: State, stockId: number) => {
+  let stock: Stock = getStockById(state, stockId)
+  ResourceTypes.forEach((resourceName) => {
+    let resource: Resource = getResource(state, stockId, resourceName)
+    resource.amount += random(-5, 5)
+  })
 }
 
 export default (state: State): number => {
