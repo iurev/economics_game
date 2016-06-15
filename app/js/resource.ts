@@ -4,7 +4,7 @@
 /// <reference path="./planet.d.ts" />
 /// <reference path="./resource.d.ts" />
 
-import { create, getById } from './db'
+import { create, getResourceById, getStockById } from './db'
 
 export const ResourceTypes = ['food', 'machines', 'energy']
 
@@ -15,7 +15,7 @@ const initialState: Resource = {
 }
 
 export const update = (state: State, resourceId: number, amount: number) => {
-  let resource: Resource = getById(state, 'resources', resourceId)
+  let resource: Resource = getResourceById(state, resourceId)
   let newAmount = resource.amount + amount
   if (newAmount < 0) newAmount = 0
   resource.amount = newAmount
@@ -24,14 +24,19 @@ export const update = (state: State, resourceId: number, amount: number) => {
 }
 
 export const transaction = (state: State, leftResourceId: number, rightResourceId: number, amount: number) => {
-  let leftResource: Resource = getById(state, 'resources', leftResourceId)
-  let rightResource: Resource = getById(state, 'resources', rightResourceId)
+  let leftResource: Resource = getResourceById(state, leftResourceId)
+  let rightResource: Resource = getResourceById(state, rightResourceId)
   let newLeftAmount = leftResource.amount + amount
   let newRightAmount = rightResource.amount - amount
   if ((newLeftAmount >= 0) && (newRightAmount >= 0)) {
     update(state, leftResourceId, amount)
     update(state, rightResourceId, -amount)
   }
+}
+
+export const getResource = (state, stockId: number, resourceName: string): Resource => {
+  let stock: Stock = getStockById(state, stockId)
+  return getResourceById(state, stock[`${resourceName}ResourceId`])
 }
 
 export default (state: State): number => {

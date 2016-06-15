@@ -2,8 +2,8 @@
 /// <reference path="./resource.d.ts" />
 
 import { TradeActionType } from './trade'
-import { ResourceTypes } from './resource'
-import { getById } from './db'
+import { ResourceTypes, getResource } from './resource'
+import { getResourceById, getStockById } from './db'
 import * as Ractive from 'ractive'
 import 'jquery';
 
@@ -38,13 +38,13 @@ const update = (renderObj) => {
 
 export default (state: State, callbacks: any) => {
   let trade = state.trade
-  let left: Stock = getById(state, 'stocks', trade.leftStockId)
-  let right: Stock = getById(state, 'stocks', trade.rightStockId)
+  let left: Stock = getStockById(state, trade.leftStockId)
+  let right: Stock = getStockById(state, trade.rightStockId)
   let renderObj
   if (left && right) {
     renderObj = ResourceTypes.map(key => {
-      let leftResource: Resource = getById(state, 'resources', left[`${key}ResourceId`])
-      let rightResource: Resource = getById(state, 'resources', right[`${key}ResourceId`])
+      let leftResource: Resource = getResource(state, trade.leftStockId, key)
+      let rightResource: Resource = getResource(state, trade.rightStockId, key)
       return {
         name: key,
         valueLeft: leftResource.amount,

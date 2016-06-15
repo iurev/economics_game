@@ -2,7 +2,7 @@
 /// <reference path="./trade.d.ts" />
 
 import { transaction} from './resource'
-import { getById } from './db'
+import { getStockById } from './db'
 
 interface TradeAction {
   name?: string,
@@ -62,8 +62,8 @@ const tradeLogic = (state: State) => {
   if (!tradeAction.name) return
   if (tradeAction.action === undefined) return
 
-  let leftStock: Stock = getById(state, 'stocks', trade.leftStockId)
-  let rightStock: Stock = getById(state, 'stocks', trade.rightStockId)
+  let leftStock: Stock = getStockById(state, trade.leftStockId)
+  let rightStock: Stock = getStockById(state, trade.rightStockId)
   let leftResourceId: number = leftStock[`${name}ResourceId`]
   let rightResourceId: number = rightStock[`${name}ResourceId`]
 
