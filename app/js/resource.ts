@@ -11,7 +11,7 @@ export const ResourceTypes = ['food', 'machines', 'energy']
 const initialState: Resource = {
   amount: 10,
   buyPrice: 1,
-  cellPrice: 2
+  sellPrice: 2
 }
 
 export const update = (state: State, resourceId: number, amount: number) => {
@@ -19,11 +19,11 @@ export const update = (state: State, resourceId: number, amount: number) => {
   let newAmount = resource.amount + amount
   if (newAmount < 0) newAmount = 0
   resource.amount = newAmount
-  resource.buyPrice = 10
-  resource.cellPrice = 10
+  resource.buyPrice = 8
+  resource.sellPrice = 10
 }
 
-export const transaction = (state: State, leftResourceId: number, rightResourceId: number, amount: number) => {
+export const transaction = (state: State, leftResourceId: number, rightResourceId: number, amount: number): boolean => {
   let leftResource: Resource = getResourceById(state, leftResourceId)
   let rightResource: Resource = getResourceById(state, rightResourceId)
   let newLeftAmount = leftResource.amount + amount
@@ -31,6 +31,9 @@ export const transaction = (state: State, leftResourceId: number, rightResourceI
   if ((newLeftAmount >= 0) && (newRightAmount >= 0)) {
     update(state, leftResourceId, amount)
     update(state, rightResourceId, -amount)
+    return true
+  } else {
+    return false
   }
 }
 

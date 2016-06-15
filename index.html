@@ -29,7 +29,7 @@
 				<div id="trade">
           <a on-click='close' class="btn-floating btn-large waves-effect waves-light red close"><i class="material-icons">x</i></a>
 					<div class="row">
-						{{#each renderObj}}
+						{{#each renderObj.tradeView}}
 							<div class="col s12">{{name}}</div>
 							<div class="col s6">
 								<span>{{valueLeft}}<span>
@@ -40,6 +40,11 @@
 								<span>{{valueRight}}<span>
 							</div>
 						{{/each}}
+					</div>
+					<div class="col s12">
+						<div class="card-panel teal">
+							<span class="white-text">your money: {{renderObj.money}}$</span>
+						</div>
 					</div>
 				</div>
 			{{/if}}

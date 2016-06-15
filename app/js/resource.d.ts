@@ -1,5 +1,5 @@
 interface Resource {
   amount: number,
-  cellPrice: number,
+  sellPrice: number,
   buyPrice: number
 }

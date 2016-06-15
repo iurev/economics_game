@@ -2,7 +2,8 @@
 /// <reference path="./trade.d.ts" />
 
 import { transaction} from './resource'
-import { getStockById } from './db'
+import { getStockById, getResourceById } from './db'
+import { clone } from 'lodash'
 
 interface TradeAction {
   name?: string,
@@ -49,7 +50,7 @@ const openTradeLogic = (state) => {
       state.trade = trade
       return
     }
-  });
+  })
 }
 
 const tradeLogic = (state: State) => {
@@ -66,11 +67,16 @@ const tradeLogic = (state: State) => {
   let rightStock: Stock = getStockById(state, trade.rightStockId)
   let leftResourceId: number = leftStock[`${name}ResourceId`]
   let rightResourceId: number = rightStock[`${name}ResourceId`]
+  let rightResource: Resource = clone(getResourceById(state, rightResourceId))
 
   if (action === TradeActionType.Sell) {
-    transaction(state, leftResourceId, rightResourceId, -1)
+    if (transaction(state, leftResourceId, rightResourceId, -1)) {
+      state.gameInfo.user.money += rightResource.buyPrice
+    }
   } else if (action === TradeActionType.Buy) {
-    transaction(state, leftResourceId, rightResourceId, 1)
+    if (transaction(state, leftResourceId, rightResourceId, 1)) {
+      state.gameInfo.user.money -= rightResource.sellPrice
+    }
   }
 }
 

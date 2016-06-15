@@ -21,6 +21,9 @@ export default {
   gameInfo: {
     planets: {
       lastUpdatedResourceTime: 0
+    },
+    user: {
+      money: 1000
     }
   }
 }

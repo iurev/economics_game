@@ -42,17 +42,21 @@ export default (state: State, callbacks: any) => {
   let right: Stock = getStockById(state, trade.rightStockId)
   let renderObj
   if (left && right) {
-    renderObj = ResourceTypes.map(key => {
+    let tradeView = ResourceTypes.map(key => {
       let leftResource: Resource = getResource(state, trade.leftStockId, key)
       let rightResource: Resource = getResource(state, trade.rightStockId, key)
       return {
         name: key,
         valueLeft: leftResource.amount,
-        priceLeft: leftResource.buyPrice,
+        priceLeft: rightResource.buyPrice,
         valueRight: rightResource.amount,
-        priceRight: leftResource.cellPrice
+        priceRight: rightResource.sellPrice
       }
     })
+    renderObj = {
+      tradeView: tradeView,
+      money: state.gameInfo.user.money
+    }
   } else {
     renderObj = undefined
   }
