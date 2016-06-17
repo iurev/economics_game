@@ -1,6 +1,8 @@
 /// <reference path="./ship.d.ts" />
 
 import createStock from './stock'
+import { stateForKey } from './initial_state'
+import { clone } from 'lodash'
 
 const easingAmount = 0.01
 const initialState: Ship = {
@@ -50,7 +52,8 @@ export const updateValues = (state) => {
   }
 }
 
-export const init = (state) => {
-  state.ship = initialState
+export const init = (state: State) => {
+  state.ship = stateForKey(clone(initialState), 'ship')
+  if (state.ship.stockId) return
   state.ship.stockId = createStock(state)
 }

@@ -1,6 +1,6 @@
 import { assign } from 'lodash'
 
-let id = 0
+let id = 1
 
 export const getById = (state: State, name: string, id: number) => {
   return state[name][id]

@@ -2,6 +2,8 @@
 
 import createStock from './stock'
 import { update as updateStock } from './stock'
+import { stateForKey } from './initial_state'
+import { cloneDeep } from 'lodash'
 
 const WHEN_TO_UPDATE_STOCK: number = 10000
 
@@ -37,8 +39,9 @@ export const updateResources = (state: State) => {
 }
 
 export const init = (state) => {
-  let planets = state.planets = initialState
-  planets.forEach((planet) => {
+  state.planets = stateForKey(cloneDeep(initialState), 'planets')
+  state.planets.forEach((planet) => {
+    if (planet.stockId) return
     planet.stockId = createStock(state)
   })
 }

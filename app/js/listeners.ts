@@ -1,6 +1,10 @@
+/// <reference path="../../typings/index.d.ts" />
+/// <reference path="./initial_state.d.ts" />
+
 import * as THREE from 'three'
 let mouse = new THREE.Vector2()
 import { getCamera, getRenderer, getScene } from './db'
+import save from './save'
 
 export default (store) => {
   const onKeyUp = (event) => {
@@ -51,4 +55,8 @@ export default (store) => {
   window.addEventListener('keydown', onKeyDown)
   document.getElementsByTagName('canvas')[0].addEventListener('mousedown', onDocumentMouseDown)
   document.getElementsByTagName('canvas')[0].addEventListener('mouseup', onDocumentMouseUp)
+
+  window.onunload = () => {
+    save(store().getState())
+  }
 }

@@ -2,7 +2,7 @@ import * as redux from 'redux'
 import init from './init'
 import update from './update'
 import keyboard from './keyboard'
-import initialState from './initial_state'
+import { savedOrInitialState } from './initial_state'
 
 const createStore = redux.createStore
 
@@ -16,7 +16,7 @@ const mouseUp = (state) => {
   return state
 }
 
-const reducers = (state = initialState, action) => {
+const reducers = (state: State = savedOrInitialState(), action) => {
   switch (action.type) {
     case 'INIT':
       return init(state)

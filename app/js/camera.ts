@@ -1,3 +1,7 @@
+/// <reference path="../../typings/index.d.ts" />
+/// <reference path="./camera.d.ts" />
+
+import { stateForKey } from './initial_state'
 import { includes } from 'lodash'
 
 const coeff = 1
@@ -26,6 +30,6 @@ export const updateValues = (camera, keys) => {
 }
 
 export const init = (state) => {
-  let options = state.camera = initialState
+  let options = state.camera = stateForKey(initialState, 'camera')
   options.aspect = window.innerWidth / window.innerHeight
 }
