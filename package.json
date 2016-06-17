@@ -6,7 +6,7 @@
   "scripts": {
     "test": "node_modules/.bin/karma start karma.conf.js",
     "start": "node_modules/.bin/webpack-dev-server",
-		"coverage": "node_modules/.bin/remap-istanbul -i coverage/phantomjs/coverage-final.json -o coverage/coverage.json && node_modules/.bin/istanbul report lcov html "
+    "coverage": "node_modules/.bin/remap-istanbul -i coverage/phantomjs/coverage-final.json -o coverage/coverage.json && node_modules/.bin/istanbul report lcov html "
   },
   "author": "wwju",
   "license": "ISC",
@@ -19,6 +19,7 @@
     "karma": "^0.13.22",
     "karma-coverage": "^1.0.0",
     "karma-jasmine": "^1.0.2",
+    "karma-mocha-reporter": "^2.0.4",
     "karma-phantomjs-launcher": "^1.0.0",
     "karma-remap-istanbul": "^0.1.0",
     "karma-webpack": "^1.7.0",
