@@ -25,7 +25,7 @@ const aLight = (state: State) => {
   return state
 }
 
-export default (state: any) => {
+export default (state: State) => {
   scene(state)
   renderer(state)
   camera(state)
@@ -33,4 +33,5 @@ export default (state: any) => {
   planets(state)
   aLight(state)
   ship(state)
+  return state
 }
