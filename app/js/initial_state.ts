@@ -1,9 +1,6 @@
 export default {
   threeObjects: {},
   camera: {},
-  scene: {
-    obj: undefined
-  },
   planets: [],
   stars: [],
   ship: {},

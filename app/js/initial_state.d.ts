@@ -1,7 +1,6 @@
 interface State {
   threeObjects: any,
   camera: any,
-  scene: any,
   planets: Array<any>,
   stars: Array<any>
   ship: any,

@@ -18,6 +18,10 @@ export const getRenderer = (state: State): THREE.Renderer => {
   return state.threeObjects.renderer
 }
 
+export const getScene = (state: State): THREE.Scene => {
+  return state.threeObjects.scene
+}
+
 export const getResourceById = (state: State, resourceId: number): Resource => {
   return getById(state, 'resources', resourceId)
 }

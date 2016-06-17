@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 let mouse = new THREE.Vector2()
-import { getCamera, getRenderer } from './db'
+import { getCamera, getRenderer, getScene } from './db'
 
 export default (store) => {
   const onKeyUp = (event) => {
@@ -18,8 +18,8 @@ export default (store) => {
   }
 
   const onDocumentMouseDown = (event) => {
-    let state = store().getState()
-    let scene = state.scene.obj
+    let state: State = store().getState()
+    let scene: THREE.Scene = getScene(state)
     let camera: THREE.Camera = getCamera(state)
     let renderer: THREE.Renderer = getRenderer(state)
 
