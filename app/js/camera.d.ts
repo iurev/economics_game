@@ -1,5 +1,4 @@
 interface Camera {
-  obj?: THREE.Camera,
   fov: number,
   aspect?: number,
   near: number,

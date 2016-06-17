@@ -1,24 +1,30 @@
+/// <reference path="../../typings/index.d.ts" />
+/// <reference path="./initial_state.d.ts" />
+/// <reference path="./camera.d.ts" />
+
 import * as THREE from 'three'
+import { createThreeObj, getCamera } from './db'
 
-let view = undefined
-
-const createNew = (camera) => {
-  view = new THREE.PerspectiveCamera(camera.fov, camera.aspect, camera.near, camera.far);
-  camera.obj = view
-  updateValues(camera)
+const createNew = (state: State) => {
+  let camera: Camera = state.camera
+  let view: THREE.Camera = new THREE.PerspectiveCamera(camera.fov, camera.aspect, camera.near, camera.far);
+  createThreeObj(state, 'camera', view)
+  updateValues(state)
 }
 
-const updateValues = (camera) => {
+const updateValues = (state: State) => {
+  let camera: Camera = state.camera
+  let view: THREE.Camera = getCamera(state)
   view.position.x = camera.x
   view.position.y = camera.y
   view.position.z = camera.z
 }
 
-export default (camera) => {
+export default (state: State) => {
+  let view: THREE.Camera = getCamera(state)
   if (view) {
-    updateValues(camera)
+    updateValues(state)
   } else {
-    createNew(camera)
+    createNew(state)
   }
-  return view
 }
