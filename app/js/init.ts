@@ -4,12 +4,13 @@ import { init as camera } from './camera'
 import { init as planets } from './planet'
 import { init as ship } from './ship'
 import { init as stars } from './star'
+import { createThreeObj } from './db'
 
-const renderer = (state) => {
+const renderer = (state: State) => {
   let r = new THREE.WebGLRenderer()
   r.setSize(window.innerWidth, window.innerHeight)
   document.body.appendChild(r.domElement)
-  state.renderer.obj = r
+  createThreeObj(state, 'renderer', r)
 }
 
 const scene = (state) => {

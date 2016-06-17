@@ -14,6 +14,10 @@ export const getCamera = (state: State): THREE.Camera => {
   return state.threeObjects.camera
 }
 
+export const getRenderer = (state: State): THREE.Renderer => {
+  return state.threeObjects.renderer
+}
+
 export const getResourceById = (state: State, resourceId: number): Resource => {
   return getById(state, 'resources', resourceId)
 }

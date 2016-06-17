@@ -4,9 +4,6 @@ export default {
   scene: {
     obj: undefined
   },
-  renderer: {
-    obj: undefined
-  },
   planets: [],
   stars: [],
   ship: {},

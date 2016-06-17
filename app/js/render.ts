@@ -6,11 +6,11 @@ import star from './star_view'
 import trade from './trade_view'
 import { viewCallbacks } from './trade'
 import spaceBg from './space_bg'
-import { getCamera } from './db'
+import { getCamera, getRenderer } from './db'
 
 export default (state) => {
   let scene = state.scene.obj
-  let renderer = state.renderer.obj
+  let renderer: THREE.Renderer = getRenderer(state)
   camera(state)
   planets(state.planets, scene)
   ship(state.ship, scene)
